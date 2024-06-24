@@ -1,0 +1,83 @@
+body{
+    margin:0px;
+    overflow-y:auto
+}
+.main-content {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group input, .form-group button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    background-color: #00A78E;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #00937A;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+table input {
+    width: 100%;
+    border: none;
+    text-align: center;
+}
+
+#tablaContainer {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 10px;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+}

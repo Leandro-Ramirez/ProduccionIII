@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="/Produccion 3/JavaScript/2 Index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="/Produccion 3/CSS/2 index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="barra">
+        <h2>Menu<img src="/Produccion 3/CSS/lista.png" alt=""></h2>
+        <ul>
+            <li><a href="/Produccion 3/HTML/1 Inicio.html">Inicio</a></li>
+            <li><button id="btnM1" onclick="ShowHide1()">Mantenimiento Correctivo</button></li>
+            <li><button id="btnM2" onclick="ShowHide2()">Cantidad Economica de Pedidos (EOQ)</button></li>
+            <li><button id="btnM3" onclick="ShowHide3()">Inv. Prom. + Rotacion de Inv.</button></li>
+            <li><a href="/Produccion 3/HTML/1 Inicio.html">LUC</a></li>
+            <li><a href="/Produccion 3/HTML/3 LTC.html">LTC</a></li>
+            <li><button id="btnM7" onclick="ShowHide7()">Cant Rec + Adm Kanbanes</button></li>
+            <li><button id="btnM8" onclick="ShowHide8()">Otro METODO</button></li>
+            <li><button id="btnM4" onclick="ShowHide4()">Arboral</button></li>
+            <li><a href="/Produccion 3/HTML/2 Inventario.html">Inventario</a></li>
+            <li id=ultimoelemento><a href="Todo lo que deberias saber de HTML.html">HTML y CSS</a></li>   
+        </ul>
+    </div> 
+    <div class="Relleno">
+        <h2>-</h2>
+        <h2>-</h2>
+    </div>
+    <div class="Metodo1">
+        <h3>Mantenimiento Correctivo</h3>
+        <p>-Descripcion-</p>
+        <p>-Formula-</p>
+        <button id="btn-abrir-1">Probar</button>
+        <dialog id="modal-1">
+            <p>-Ingresar datos en los campos-</p>
+            <form method="dialog">
+                <label>El MTBF a ingresar sera:</label>
+                <select id="Decision" name="Eleccion">
+                    <option value="Entero" selected>Entero</option>
+                    <option value="Decimal">Decimal</option>
+                </select><br>
+                <label>Horas Kilometradas = <input id="HK" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>MTBF = <input id="MTBF" type="number" min="0" placeholder = "Numero Entero" oninput = "this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)"></label><br>
+                <label>Nº Fallas = <input id="NFallas" readonly placeholder = "¿?"></label><br>
+                <label>Duracion de la Tarea = <input id="DT" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Costo por hora de Trabajo = <input id="CHT" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Respuestos = <input id="Rep" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Costo de Tareas Operacionales = <input id="CTO" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Retraso Logico = <input id="RL" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Costo unitario por parada = <input id="CUP" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Costo de falla de vez unica = <input id="CFU" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br><br>
+                <p>Costo de Mantenimiento Correctivo = <span id="resultado"></span></p>
+            </form>
+            <button id="btn-cerrar-1">Regresar</button>
+            <button id="btn-limpiar-1">Limpiar</button>
+            <button id="btn-calcular-1">Calcular</button>
+        </dialog>
+    </div> 
+
+    <div class="Metodo2">
+        <h3>Cantidad Economica de Pedidos (EOQ)</h3>
+        <p>-Descripcion-</p>
+        <p>-Formula-</p>
+        <button id="btn-abrir-2">Probar</button>
+        <dialog id="modal-2">
+            <p>-Ingresar datos en los campos-</p>
+            <form method="dialog">
+                <label>Demanda = <input id="D" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Dias = <input id="T" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Costo de Hacer el Pedido = <input id="S" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Costo de Mantenimiento = <input id="H" step = "0.01" type="number" min="0" oninput = "this.value = this.value.replace('^\d+(.\d+)?$', '')" placeholder="Numero Decimal"></label><br><br>
+                <p>Resultado = <span id="resultado2"></span></p>
+            </form>
+            <button id="btn-cerrar-2">Regresar</button>
+            <button id="btn-limpiar-2">Limpiar</button>
+            <button id="btn-calcular-2">Calcular</button>
+        </dialog>
+    </div> 
+
+    <div class="Metodo3">
+        <h3>Cantidad Economica de Pedidos (EOQ)</h3>
+        <p>-Descripcion-</p>
+        <p>-Formula-</p>
+        <button id="btn-abrir-3">Probar</button>
+        <dialog id="modal-3">
+            <p>-Ingresar datos en los campos-</p>
+            <form method="dialog">
+                <label>El MTBF a ingresar sera:</label>
+                <select id="Decision1" name="Eleccion">
+                    <option value="Cantidad" selected>Cantidad</option>
+                    <option value="Periodo">Periodo</option>
+                </select><br>
+                <label>Demanda = <input id="DD" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Semanas Anuales = <input id="Sem" style="display:hidden" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Cantidad Pedida = <input id="Q" style="display:visible" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Ciclo Revision = <input id="TT" style="display:hidden" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Inventario de Seguridad = <input id="SS" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br><br>
+                <p>Inventario Promedio = <span id="resultado3"></span></p><br>
+                <p>Rotacion de INventario = <span id="resultado4"></span></p>
+            </form>
+            <button id="btn-cerrar-3">Regresar</button>
+            <button id="btn-limpiar-3">Limpiar</button>
+            <button id="btn-calcular-3">Calcular</button>
+        </dialog>
+    </div> 
+
+    <div class="Metodo4" id="WAOS">
+        <h3>Arboral</h3>
+        <p>-¿¿¿En serio creian que haria esto???-</p>
+        <video width="640" height="360" controls loop>
+            <source src="/Produccion 3/CSS/Jajaja.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="Metodo7">
+        <h3>Cant Rec + Adm Kanbanes</h3>
+        <p>-Descripcion-</p>
+        <p>-Formula-</p>
+        <button id="btn-abrir-7">Probar</button>
+        <dialog id="modal-7">
+            <p>-Ingresar datos en los campos-</p>
+            <form method="dialog">
+                <label>Recipientes = <input id="CC" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Demanda = <input id="Dem" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Tiempo = <input id="Tie" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <p>Recipientes Necesarios = <span id="resultado5"></span></p><br>
+                <p>Inventario Acumulado = <span id="resultado6"></span></p>
+            </form>
+            <button id="btn-cerrar-7">Regresar</button>
+            <button id="btn-limpiar-7">Limpiar</button>
+            <button id="btn-calcular-7">Calcular</button>
+        </dialog>
+    </div>
+
+    <div class="Metodo8">
+        <h3>OTRO METODO</h3>
+        <p>-Descripcion-</p>
+        <p>-Formula-</p>
+        <button id="btn-abrir-8">Probar</button>
+        <dialog id="modal-8">
+            <p>-Ingresar datos en los campos-</p>
+            <form method="dialog">
+                <label>El MTBF a ingresar sera:</label>
+                <select id="Decision8" name="Eleccion">
+                    <option value="Cantidad" selected>Cantidad</option>
+                    <option value="Periodo">Periodo</option>
+                </select><br>
+                <label>Demanda = <input id="DD" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Semanas Anuales = <input id="Sem" style="display:hidden" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Cantidad Pedida = <input id="Q" style="display:visible" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Ciclo Revision = <input id="TT" style="display:hidden" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br>
+                <label>Inventario de Seguridad = <input id="SS" type="number" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''),validarLongitud(this)" placeholder="Numero Entero"></label><br><br>
+                <p>Inventario Promedio = <span id="resultado6"></span></p>
+            </form>
+            <button id="btn-cerrar-8">Regresar</button>
+            <button id="btn-limpiar-8">Limpiar</button>
+            <button id="btn-calcular-8">Calcular</button>
+        </dialog>
+    </div>
+
+    <script>
+        function validarLongitud(input) {
+          if (input.value.length > 5) {
+            input.value = input.value.slice(0, 5);
+          }
+        }
+    </script>
+    <script src="/Produccion 3/JavaScript/2 Index.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
