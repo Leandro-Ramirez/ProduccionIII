@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     // Crear tabla y encabezado
     const tabla = document.createElement('table');
     const encabezado = document.createElement('tr');
-    const nombres = ['Periodo', 'Unidades', 'Periodos mantenidos', 'Costo de mantenimiento', 'Costo de mantenimiento acumulado'];
+    const nombres = ['Periodo', 'Unidades', 'S', 'K', 'Costo Total', 'Costo Unitario Total'];
 
     nombres.forEach(nombre => {
         const th = document.createElement('th');
@@ -35,42 +35,54 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let periodo = 1;
     let datosGuardados = localStorage.getItem('datosTabla');
     let lista = JSON.parse(datosGuardados);
-    let costoMante = 0;
     let periodosMantenidos = 0;
+    let CosTot = 0;
+    let CosUnTo = 0;
     let unidadesMarcadasEnRojo = []; 
     for (let i = 0; i < numeroDeFilas; i++) {
-        let valorK = lista[i] * (periodosMantenidos ) * K; // Ajuste para periodos mantenidos correctos
+        let valorK = lista[i] * (periodosMantenidos) * K; // Ajuste para periodos mantenidos correctos
 
-        if (costoMante == 0) {
-            costoMante = valorK;
+        if (periodosMantenidos == 0) {
+            CosTot = valorK + s;
         } else {
-            costoMante += valorK;
+            CosTot += valorK;
         }
+        CosUnTo = CosTot/lista[i];
+
         // Crear la fila y celdas
         const fila = document.createElement('tr');
 
+        // Periodo (Bueno)
         var celda = document.createElement('td');
         celda.textContent = periodo;
+        // Unidades (Bueno)
         var celda1 = document.createElement('td');
         celda1.textContent = lista[i];
+        // S (Bueno)
         var celda2 = document.createElement('td');
-        celda2.textContent = periodosMantenidos ;
+        celda2.textContent = s;
+        // K 
         var celda3 = document.createElement('td');
         celda3.textContent = valorK;
+        // Costo Total
         var celda4 = document.createElement('td');
-        celda4.textContent = costoMante;
+        celda4.textContent = CosTot;
+        // Costo Unitario Total
+        var celda5 = document.createElement('td');
+        celda5.textContent = CosUnTo;
 
         fila.appendChild(celda);
         fila.appendChild(celda1);
         fila.appendChild(celda2);
         fila.appendChild(celda3);
         fila.appendChild(celda4);
+        fila.appendChild(celda5);
 
-        if (costoMante > s) {
+        if (periodo === 5) {
             fila.style.backgroundColor = 'red';
             unidadesMarcadasEnRojo.push({unidad:lista[i],col:i}); //Guardar unidades marcadas en rojo
             periodo = 1; // Reiniciar el periodo
-            costoMante = 0; // Reiniciar el costo de mantenimiento acumulado
+            CosUnTo = 0; // Reiniciar el costo de mantenimiento acumulado
             periodosMantenidos = 0; // Reiniciar los periodos mantenidos
         } else {
             periodo++;
