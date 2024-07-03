@@ -38,10 +38,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let periodosMantenidos = 0;
     let CosTot = 0;
     let CosUnTo = 0;
+    let periodoAct = 0;
+    let unidadesAct = 0;
     let unidadesMarcadasEnRojo = []; 
     for (let i = 0; i < numeroDeFilas; i++) {
         let valorK = lista[i] * (periodosMantenidos) * K; // Ajuste para periodos mantenidos correctos
-
+        unidadesAct = parseInt(lista[i]);
+        periodoAct = periodoAct + unidadesAct;
         if (periodosMantenidos == 0) {
             CosTot = valorK + s;
         } else {
@@ -57,7 +60,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         celda.textContent = periodo;
         // Unidades (Bueno)
         var celda1 = document.createElement('td');
-        celda1.textContent = lista[i];
+        celda1.textContent = periodoAct;
         // S (Bueno)
         var celda2 = document.createElement('td');
         celda2.textContent = s;
@@ -80,13 +83,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         if (periodo === 5) {
             fila.style.backgroundColor = 'red';
-            unidadesMarcadasEnRojo.push({unidad:lista[i],col:i}); //Guardar unidades marcadas en rojo
+            unidadesMarcadasEnRojo.push({unidad:periodoAct,col:i}); //Guardar unidades marcadas en rojo
             periodo = 1; // Reiniciar el periodo
             CosUnTo = 0; // Reiniciar el costo de mantenimiento acumulado
             periodosMantenidos = 0; // Reiniciar los periodos mantenidos
+            periodoAct = 0;
         } else {
             periodo++;
             periodosMantenidos++;
+        }
+        if (i === numeroDeFilas-1) {
+            fila.style.backgroundColor = 'red';
+            unidadesMarcadasEnRojo.push({unidad:periodoAct,col:i}); //Guardar unidades marcadas en rojo
         }
         tabla.appendChild(fila);
     }
